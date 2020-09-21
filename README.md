@@ -26,7 +26,7 @@ This project for read dinamic excel and import it into database, and than displa
 
 ## Testing
 
-1. Use file excel in >/public/excel for testing
+1. Use file excel in > /public/excel for testing
 2. Using route /bebek for upload excel
 3. Update web.php for and update data id for testing (id of document in document table)
    
