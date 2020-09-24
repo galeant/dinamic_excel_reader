@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  #  The Application
+  app:
+    container_name: lara8
+    build:
+      context: ./
+      dockerfile: docker_setting/app.dockerfile
+    volumes:
+      - ./storage:/var/www/storage
+    env_file: ".env.docker"
+    environment:
+      - "DB_HOST=database"
+
+  # The Web Server
+  web:
+    container_name: nginx_server
+    build:
+      context: ./
+      dockerfile: docker_setting/web.dockerfile
+    volumes:
+      - ./storage/logs/:/var/log/nginx
+    ports:
+      - 8990:80
+  # The Database
+  database:
+    container_name: mysql_db
+    image: mysql:5.6
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - "MYSQL_DATABASE=lara8"
+      - "MYSQL_USER=root"
+      - "MYSQL_PASSWORD=root"
+    ports:
+      - 8991:3306
+
+volumes:
+  dbdata:
